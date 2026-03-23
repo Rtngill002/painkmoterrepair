@@ -53,6 +53,92 @@
 <footer>
     &copy; 2026 Paink Motor Repair - Sangria, Rajasthan
 </footer>
+<section id="booking" style="padding: 40px; background-color: #f9f9f9; font-family: 'Arial', sans-serif; border-top: 2px solid #ddd;">
+    <h2 style="text-align: center; color: #d32f2f;">सर्विस बुकिंग (Book Your Service)</h2>
+    
+    <div style="max-width: 450px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+        <form id="whatsappBookingForm">
+            <div style="margin-bottom: 15px;">
+                <label style="font-weight: bold;">आपका नाम:</label>
+                <input type="text" id="custName" placeholder="अपना नाम लिखें" required style="width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 8px;">
+            </div>
 
+            <div style="margin-bottom: 15px;">
+                <label style="font-weight: bold;">मोबाइल नंबर:</label>
+                <input type="tel" id="custPhone" placeholder="मोबाइल नंबर" required style="width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 8px;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="font-weight: bold;">बुकिंग की तारीख (संडे छुट्टी रहती है):</label>
+                <input type="date" id="bookDate" required style="width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 8px;">
+                <small id="dateError" style="color: red; display: none; margin-top: 5px;">* क्षमा करें, संडे को हमारी छुट्टी रहती है। कृपया दूसरी तारीख चुनें।</small>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="font-weight: bold;">सर्विस चुनें:</label>
+                <div style="margin-top: 10px; background: #f0f0f0; padding: 10px; border-radius: 8px;">
+                    <input type="radio" name="serviceType" value="Free Time Service (₹0)" checked> फ्री टाइम सर्विस (₹0)<br><br>
+                    <input type="radio" name="serviceType" value="Fast Service (₹50)"> <b>फास्ट सर्विस (₹50)</b>
+                </div>
+            </div>
+
+            <div id="qrSection" style="display:none; text-align: center; border: 2px dashed #28a745; padding: 15px; margin-bottom: 20px; border-radius: 10px;">
+                <p style="color: #d32f2f; font-weight: bold; margin-bottom: 10px;">फास्ट सर्विस के लिए ₹50 पे करें</p>
+                <div style="width: 160px; height: 160px; background: #eee; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px solid #ddd;">
+                    [यहाँ आपका QR कोड आएगा]
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">पेमेंट के बाद नीचे बटन दबाएं</p>
+            </div>
+
+            <button type="submit" style="width: 100%; padding: 15px; background-color: #25D366; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold;">
+                WhatsApp पर बुकिंग भेजें
+            </button>
+        </form>
+    </div>
+</section>
+
+<script>
+    const bookingForm = document.getElementById('whatsappBookingForm');
+    const qrSection = document.getElementById('qrSection');
+    const serviceRadios = document.getElementsByName('serviceType');
+    const dateInput = document.getElementById('bookDate');
+    const dateError = document.getElementById('dateError');
+
+    // संडे चेक करने के लिए लॉजिक
+    dateInput.addEventListener('input', function(e) {
+        const day = new Date(this.value).getUTCDay();
+        if([0].includes(day)) { // 0 मतलब Sunday
+            e.preventDefault();
+            this.value = '';
+            dateError.style.display = 'block';
+        } else {
+            dateError.style.display = 'none';
+        }
+    });
+
+    // आज से पहले की तारीख ब्लॉक करना
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+
+    // सर्विस बदलने पर QR दिखाना या छुपाना
+    serviceRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            qrSection.style.display = this.value.includes('Fast') ? 'block' : 'none';
+        });
+    });
+
+    bookingForm.onsubmit = function(e) {
+        e.preventDefault();
+        const name = document.getElementById('custName').value;
+        const phone = document.getElementById('custPhone').value;
+        const date = document.getElementById('bookDate').value;
+        let selectedService = "";
+        for (const radio of serviceRadios) { if (radio.checked) { selectedService = radio.value; break; } }
+
+        const myWhatsAppNumber = "91XXXXXXXXXX"; // अपना नंबर यहाँ लिखें
+        const message = *नई बुकिंग (Paink Motor Repair)*%0A%0A*नाम:* ${name}%0A*फ़ोन:* ${phone}%0A*तारीख:* ${date}%0A*सर्विस:* ${selectedService};
+        window.open(https://wa.me/${myWhatsAppNumber}?text=${message}, '_blank');
+    };
+</script>
 </body>
 </html>
