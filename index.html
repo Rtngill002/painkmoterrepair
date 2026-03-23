@@ -1,515 +1,58 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pankaj Motor Repair - Expert Bike Service in Sangria</title>
-    <meta name="description" content="Pankaj Motor Repair - Best bike service and repair workshop in Sangria, Jodhpur. Engine tuning, oil change, spare parts & full service.">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Paink Motor Repair - Sangria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        /* Mechanical Color Theme */
-        :root {
-            --black: #0a0a0a;
-            --dark-gray: #1a1a1a;
-            --gray: #2d2d2d;
-            --light-gray: #666;
-            --silver: #c4c4c4;
-            --orange: #ff6b35;
-            --orange-dark: #e55a2b;
-            --white: #ffffff;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 100%);
-            color: var(--white);
-            padding: 1.2rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.6);
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(1.4rem, 4vw, 2rem);
-            font-weight: 900;
-            background: linear-gradient(45deg, var(--orange), var(--white));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
-        }
-
-        /* Hero Section - Prominent Shop Photo */
-        .hero {
-            background: linear-gradient(rgba(10,10,10,0.85), rgba(10,10,10,0.85)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><pattern id="shop-bg" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse"><rect fill="%230a0a0a" width="200" height="200"/><rect fill="%23ff6b35" x="20" y="30" width="80" height="40" rx="5" opacity="0.2"/><rect fill="%23c4c4c4" x="120" y="100" width="60" height="30" rx="3" opacity="0.3"/><circle fill="%232d2d2d" cx="80" cy="150" r="25" opacity="0.4"/></pattern></defs><rect width="1920" height="1080" fill="url(%23shop-bg)"/><rect fill="%23ff6b35" opacity="0.1" x="300" y="400" width="600" height="300" rx="20"/><rect fill="%23c4c4c4" opacity="0.15" x="900" y="500" width="400" height="200" rx="15"/></svg>');
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-            position: relative;
-            padding: 120px 2rem 80px;
-        }
-
-        .hero h1 {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(2.5rem, 7vw, 5.5rem);
-            margin-bottom: 1.2rem;
-            text-shadow: 4px 4px 15px rgba(0,0,0,0.9);
-            letter-spacing: 4px;
-            animation: heroGlow 2.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes heroGlow {
-            0% { 
-                text-shadow: 0 0 20px var(--orange), 0 0 30px var(--orange), 0 0 40px var(--orange);
-                transform: scale(1);
-            }
-            100% { 
-                text-shadow: 0 0 30px var(--orange), 0 0 40px var(--orange), 0 0 50px var(--orange);
-                transform: scale(1.02);
-            }
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 3vw, 1.6rem);
-            margin-bottom: 3.5rem;
-            opacity: 0.95;
-            max-width: 800px;
-            font-weight: 300;
-        }
-
-        /* Quick Contact Buttons - Three Big Buttons */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            width: 100%;
-            margin-bottom: 2rem;
-        }
-
-        .action-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            padding: 2.5rem 2rem;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            position: relative;
-            overflow: hidden;
-            min-height: 160px;
-        }
-
-        .action-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.6s;
-        }
-
-        .action-btn:hover::before {
-            left: 100%;
-        }
-
-        .action-btn i {
-            font-size: 3.5rem;
-            margin-bottom: 0.8rem;
-            transition: transform 0.4s ease;
-        }
-
-        .action-btn:hover i {
-            transform: scale(1.2) rotate(10deg);
-        }
-
-        .action-btn .phone-number {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-top: 0.2rem;
-        }
-
-        .call-btn {
-            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-            color: var(--white);
-            border: 3px solid var(--orange);
-        }
-
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #25d366, #20ba5a);
-            color: var(--white);
-            border: 3px solid #25d366;
-        }
-
-        .maps-btn {
-            background: linear-gradient(135deg, var(--gray), var(--dark-gray));
-            color: var(--white);
-            border: 3px solid var(--silver);
-        }
-
-        .action-btn:hover {
-            transform: translateY(-12px) scale(1.03);
-            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-        }
-
-        /* General Sections */
-        section {
-            padding: 110px 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(2.2rem, 5vw, 4rem);
-            margin-bottom: 5rem;
-            color: var(--black);
-            position: relative;
-            letter-spacing: 3px;
-            font-weight: 700;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 6px;
-            background: linear-gradient(90deg, var(--orange), var(--orange-dark));
-            border-radius: 4px;
-            box-shadow: 0 0 25px rgba(255,107,53,0.6);
-        }
-
-        /* Services Section */
-        .services-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .service-card {
-            background: var(--white);
-            padding: 3.5rem 2.5rem;
-            border-radius: 30px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            border: 2px solid transparent;
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, var(--orange), var(--silver), var(--orange));
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            border-radius: 28px;
-        }
-
-        .service-card:hover::before {
-            opacity: 0.08;
-        }
-
-        .service-card:hover {
-            transform: translateY(-20px);
-            border-color: var(--orange);
-            box-shadow: 0 35px 80px rgba(255,107,53,0.25);
-        }
-
-        .service-icon {
-            font-size: 4.5rem;
-            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
-            filter: drop-shadow(0 5px 15px rgba(255,107,53,0.4));
-            transition: transform 0.4s ease;
-        }
-
-        .service-card:hover .service-icon {
-            transform: scale(1.1) rotateY(360deg);
-        }
-
-        .service-card h3 {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.6rem;
-            margin-bottom: 1.2rem;
-            color: var(--black);
-            letter-spacing: 1.5px;
-        }
-
-        .service-card p {
-            color: var(--light-gray);
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        /* Gallery Section */
-        .gallery-section {
-            background: var(--dark-gray);
-            color: var(--white);
-        }
-
-        .section-title.white {
-            color: var(--white);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            height: 300px;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 35px 90px rgba(255,107,53,0.4);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.15);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,107,53,0.95), rgba(10,10,10,0.98));
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .gallery-overlay i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--white);
-        }
-
-        .gallery-overlay h4 {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.3rem;
-            letter-spacing: 2px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--black);
-            color: var(--silver);
-            padding: 4rem 0 2rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-section h3 {
-            color: var(--orange);
-            font-family: 'Orbitron', monospace;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-        }
-
-        .contact-highlight {
-            display: block;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--orange);
-            margin: 1rem 0;
-            font-family: 'Orbitron', monospace;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid var(--gray);
-            padding-top: 2.5rem;
-            color: var(--light-gray);
-            font-size: 0.95rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 0 1.5rem;
-            }
-
-            .quick-actions {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .action-btn {
-                padding: 2rem 1.5rem;
-                min-height: 140px;
-            }
-
-            section {
-                padding: 80px 0;
-            }
-
-            .container {
-                padding: 0 1.5rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 1.6rem;
-            }
-
-            .action-btn {
-                padding: 1.8rem 1.2rem;
-            }
-
-            .service-card {
-                padding: 2.5rem 2rem;
-            }
-        }
-
-        /* Scroll Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(60px);
-            transition: all 1s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Smooth Scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #ffffff; color: #333; }
+        header { background-color: #f8f8f8; padding: 20px; text-align: center; border-bottom: 3px solid #ff6600; }
+        .hero { padding: 40px 20px; text-align: center; }
+        .hero h1 { font-size: 2.2rem; color: #222; margin-bottom: 5px; }
+        .hero p { font-size: 1.1rem; color: #ff6600; font-weight: bold; }
+        .shop-photo { width: 100%; max-width: 500px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin: 20px 0; }
+        .btn-container { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 25px; }
+        .btn { text-decoration: none; padding: 16px 30px; border-radius: 50px; font-weight: bold; width: 85%; max-width: 320px; text-align: center; color: white; transition: 0.3s; font-size: 1.1rem; }
+        .btn-call { background-color: #ff6600; }
+        .btn-whatsapp { background-color: #25d366; }
+        .btn-maps { background-color: #4285f4; }
+        .services { padding: 30px 20px; background-color: #f9f9f9; }
+        .service-card { background: #fff; border: 1px solid #eee; padding: 15px; margin-bottom: 10px; border-radius: 12px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
+        footer { text-align: center; padding: 20px; font-size: 0.8rem; background: #222; color: #999; margin-top: 30px; }
     </style>
 </head>
 <body>
-    <!-- Fixed Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo">🔧 Pankaj Motor Repair</div>
-        </div>
-    </header>
 
-    <!-- Hero Section with Shop Photo Background -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Pankaj Motor Repair</h1>
-            <p class="hero-subtitle">
-                Expert Bike Service in Sangria • Engine Tuning • Oil Change • Spare Parts • Full Service
-            </p>
-            
-            <!-- Three Big Quick Contact Buttons -->
-            <div class="quick-actions">
-                <!-- Call Button -->
-                <a href="tel:+917790844187" class="action-btn call-btn fade-in">
-                    <i class="fas fa-phone-volume"></i>
-                    <div>
-                        <strong>Call Now</strong>
-                        <div class="phone-number">+91 7790844187</div>
-                    </div>
-                </a>
+<header>
+    <h2 style="color: #ff6600; margin: 0;">🔧 Paink Motor Repair</h2>
+</header>
 
-                <!-- WhatsApp Button -->
-                <a href="https://wa.me/917790844187?text=Hi%20Pankaj%20Motor%20Repair%2C%20I%20need%20bike%20service%20in%20Sangria" 
-                   class="action-btn whatsapp-btn fade-in" target="_blank">
-                    <i class="fab fa-whatsapp"></i>
-                    <div>
-                        <strong>WhatsApp Chat</strong>
-                        <span>Instant Response</span>
-                    </div>
-                </a>
+<div class="hero">
+    <h1>Paink Motor Repair</h1>
+    <p>संगरिया की सबसे भरोसेमंद बाइक रिपेयरिंग शॉप</p>
+    
+    <img src="shop.jpg" alt="Paink Motor Repair Sangria" class="shop-photo" onerror="this.style.display='none';">
 
-                <!-- Google Maps Directions Button -->
-                <a href="https://www.google.com/maps/place/29%C2%B047'58.3%22N+74%C2%B027'51.7%22E/@29.7995167,74.4617918,17z/data=!3m1!4b1!4m4!3m3!8m2!3d29.7995167!4d74.4643667?hl=hi&entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D" 
-                   class="action-btn maps-btn fade-in" target="_blank">
-                    <i class="fas fa-map-marked-alt"></i>
+    <div class="btn-container">
+        <a href="tel:+91XXXXXXXXXX" class="btn btn-call">📞 अभी कॉल करें</a>
+        <a href="https://wa.me/91XXXXXXXXXX?text=नमस्ते, मुझे मेरी बाइक सर्विस करवानी है।" class="btn btn-whatsapp">💬 व्हाट्सएप चैट करें</a>
+        <a href="यहाँ-अपना-मैप-लिंक-पेस्ट-करें" class="btn btn-maps">📍 दुकान का रास्ता (Maps)</a>
+    </div>
+</div>
+
+<div class="services">
+    <h3 style="text-align: center; color: #222;">हमारी खास सेवाएं</h3>
+    <div class="service-card">✅ इंजन रिपेयर और फुल ट्यूनिंग</div>
+    <div class="service-card">✅ ऑयल चेंज और जनरल सर्विस</div>
+    <div class="service-card">✅ असली स्पेयर पार्ट्स उपलब्ध</div>
+    <div class="service-card">✅ बाइक वॉश और चैन क्लीनिंग</div>
+</div>
+
+<footer>
+    &copy; 2026 Paink Motor Repair - Sangria, Rajasthan
+</footer>
+
+</body>
+</html>
