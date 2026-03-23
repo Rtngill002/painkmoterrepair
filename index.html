@@ -59,27 +59,30 @@
     const serviceRadios = document.getElementsByName('serviceType');
     const dateInput = document.getElementById('bookDate');
 
+    // गूगल शीट का URL यहाँ डालें
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwrP_4HDYInrzuHNV2XR9LhBL5cciu0NSeNjYj77prwotREi2ofcpfOuMFTf7h5WHbYmw/exec';
+
     // आज से पहले की तारीख ब्लॉक करना
     const today = new Date().toISOString().split('T')[0];
     dateInput.setAttribute('min', today);
 
-    // संडे ब्लॉक करने का लॉजिक
+    // संडे ब्लॉक करना
     dateInput.addEventListener('change', function() {
         const selectedDate = new Date(this.value);
         if (selectedDate.getUTCDay() === 0) {
-            alert("❌ संडे को छुट्टी रहती है! कृपया कोई और दिन चुनें।");
+            alert("❌ संडे को छुट्टी रहती है! कृपया सोमवार से शनिवार चुनें।");
             this.value = '';
         }
     });
 
-    // QR दिखाना या छुपाना
+    // QR दिखाना/छुपाना
     serviceRadios.forEach(radio => {
         radio.addEventListener('change', function() {
             qrSection.style.display = this.value.includes('Fast') ? 'block' : 'none';
         });
     });
 
-    // बुकिंग सबमिट होने पर मैसेज दिखाना
+    // बुकिंग सबमिट प्रोसेस
     bookingForm.onsubmit = function(e) {
         e.preventDefault();
         
@@ -89,28 +92,51 @@
         let selectedService = "";
         for (const radio of serviceRadios) { if (radio.checked) { selectedService = radio.value; break; } }
 
-        // सफलता का संदेश दिखाना
+        // डुप्लीकेट बुकिंग चेक (LocalStorage)
+        if (localStorage.getItem('last_date') === dateVal && localStorage.getItem('last_phone') === phone) {
+            alert(नमस्ते ${name}, आप इस तारीख के लिए पहले ही बुक कर चुके हैं!);
+            return false;
+        }
+
+        // लोडिंग स्क्रीन
         bookingForm.innerHTML = `
-            <div style="text-align: center; padding: 20px;">
-                <h2 style="color: #28a745;">✅ बुकिंग सफल!</h2>
-                <p>आपकी जानकारी रिकॉर्ड कर ली गई है।</p>
-                <p style="font-size: 14px; color: #666;">अब आपको व्हाट्सएप पर भेजा जा रहा है...</p>
-                <div style="margin-top: 15px; border: 4px solid #f3f3f3; border-top: 4px solid #25D366; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+            <div style="text-align: center; padding: 30px;">
+                <div id="loader" style="border: 5px solid #f3f3f3; border-top: 5px solid #25D366; border-radius: 50%; width: 45px; height: 45px; animation: spin 0.7s linear infinite; margin: 0 auto 20px;"></div>
+                <h3 id="statusText" style="color: #333; margin: 0;">बुकिंग की जा रही है...</h3>
             </div>
-            <style>
-                @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-            </style>
+            <style> @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } } </style>
         `;
 
-        // 2 सेकंड बाद व्हाट्सएप खोलना
+        // 1. डेटा को गूगल शीट पर भेजना
+        fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors', // ज़रूरी है
+            cache: 'no-cache',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name, phone: phone, date: dateVal, service: selectedService })
+        });
+
+        // 2. 1 सेकंड बाद नाम दिखाना और WhatsApp खोलना
         setTimeout(function() {
+            localStorage.setItem('last_date', dateVal);
+            localStorage.setItem('last_phone', phone);
+            
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('statusText').innerHTML = `
+                <span style="color: #28a745; font-size: 22px;">✅ सफल!</span><br>
+                <span style="font-size: 18px;">नमस्ते <b>${name}</b></span><br>
+                <p style="font-size: 14px; color: #666;">व्हाट्सएप खुल रहा है...</p>
+            `;
+
             const myWhatsAppNumber = "917790844187"; 
             const message = *नई बुकिंग (Paink Motor Repair)*%0A%0A*नाम:* ${name}%0A*फ़ोन:* ${phone}%0A*तारीख:* ${dateVal}%0A*सर्विस:* ${selectedService};
-            window.open(https://wa.me/${myWhatsAppNumber}?text=${message}, '_blank');
             
-            // पेज को 3 सेकंड बाद वापस नॉर्मल करना ताकि दूसरा ग्राहक बुक कर सके
-            setTimeout(() => { location.reload(); }, 3000);
-        }, 2000);
+            setTimeout(() => {
+                window.open(https://wa.me/${myWhatsAppNumber}?text=${message}, '_blank');
+            }, 500);
+            
+            setTimeout(() => { location.reload(); }, 4000);
+        }, 1000); 
     };
 </script>
 </body>
